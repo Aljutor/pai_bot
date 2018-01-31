@@ -8,12 +8,13 @@ from telegram.error import (TelegramError, Unauthorized, BadRequest,
 
 from bot.user import UserState
 
+from bot.handlers.start import Start_handler
+from bot.handlers.start import Help_handler
 from bot.handlers.talk import Talk_handler
 from bot.handlers.xo5 import XO5_handler
-from bot.handlers.start import Start_handler
-from bot.handlers.matches import Matches_handler
 from bot.handlers.xo3 import XO3_handler
-from bot.handlers.help import Help_handler
+
+from bot.handlers.matches import Matches_handler
 
 from bot.handlers.message import Text_handler
 

@@ -36,7 +36,7 @@ def xo_3(bot, update):
 
     bot.send_message (
         chat_id=update.message.chat_id,
-        text="Awaiting your move",
+        text="Awaiting your move (A1 style)",
     )
 
 XO3_handler = CommandHandler('xo3', xo_3)
