@@ -52,10 +52,13 @@ class TicTac5X5():
                             if self.field[i][j] == '.':
                                 validSteps[(i, j)] = self.potential(
                                     [i, j], self.me)
-        el = max(validSteps, key=validSteps.get)
-        self.field[el[0]][el[1]] = self.me
-        if self.potential([el[0], el[1]], self.field[el[0]][el[1]]) >= ((self.inARow+1)**(self.inARow+1))*10:
-            self.winner = self.field[el[0]][el[1]]
+        if validSteps:
+            el = max(validSteps, key=validSteps.get)
+            self.field[el[0]][el[1]] = self.me
+            if self.potential([el[0], el[1]], self.field[el[0]][el[1]]) >= ((self.inARow+1)**(self.inARow+1))*10:
+                self.winner = self.field[el[0]][el[1]]
+        else:
+            self.winner = 'Draw'
 
     def potentialOfLine(self, line, me, mid):
         if len(line) < self.inARow + 1:
