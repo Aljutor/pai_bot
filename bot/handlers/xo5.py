@@ -38,7 +38,7 @@ def xo_5(bot, update):
 
     bot.send_message (
         chat_id=update.message.chat_id,
-        text="Awaiting your move",
+        text="Awaiting your move  (A1 style)",
     )
 
 
