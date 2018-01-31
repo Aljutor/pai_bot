@@ -38,7 +38,17 @@ def xo5_game_handler(bot, update):
 
         return
 
-    user_state.xo5_game.sendUserMove(update.message.text)
+    ok = user_state.xo5_game.sendUserMove(update.message.text)
+
+    if (not ok):
+        bot.send_message (
+            chat_id=update.message.chat_id,
+            text="Invalid Move",
+            reply_markup=reply_markup
+        )
+
+        return
+
 
     bot.send_message (
         chat_id=update.message.chat_id,
@@ -72,7 +82,16 @@ def xo3_game_handler(bot, update):
 
         return
 
-    user_state.xo3_game.sendUserMove(update.message.text)
+    ok = user_state.xo3_game.sendUserMove(update.message.text)
+
+    if (not ok):
+        bot.send_message (
+            chat_id=update.message.chat_id,
+            text="Invalid Move",
+            reply_markup=reply_markup
+        )
+
+        return
 
     bot.send_message (
         chat_id=update.message.chat_id,
