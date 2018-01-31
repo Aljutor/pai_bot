@@ -87,7 +87,7 @@ def xo3_game_handler(bot, update):
 
         return
 
-    ok = user_state.xo3_game.sendUserMove(update.message.text)
+    ok = user_state.xo3_game.xo_bot(update.message.text)
 
     if (not ok):
         bot.send_message (

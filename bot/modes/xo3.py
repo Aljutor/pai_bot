@@ -3,7 +3,14 @@ from random import choice
 import platform
 from os import system
 
-class AI:
+import math
+from random import choice
+import platform
+from os import system
+
+class TicTac3X3:
+    human_choice = 'X'
+    computer_choice = 'O'
     def __init__(self):
         self.board = [
             [0,0,0],
@@ -12,8 +19,8 @@ class AI:
         ]
 
         # choise can be X or O
-        human_choice = ''
-        computer_choice = ''
+        human_choice = 'X'
+        computer_choice = 'O'
 
         self.HUMAN = -1
         self.COMPUTER = +1
@@ -101,21 +108,22 @@ class AI:
         return best
 
     def render(self, state):
-        print("  | A || B || C |\n-----------------")
+        line = ''
+        line += " | 1 || 2 || 3 |\n-----------------\n"
         r = 0
         for row in state:
-            r+=1
-            print(r, end=' ')
+            line +=(chr(r + ord('A')))
             for cell in row:
-                if cell == +1:
-                    print('|', computer_choice, '|',end='')
-                elif cell == -1:
-                    print('|', human_choice, '|',end='')
+                if cell == -1:
+                    line += '| X |'
+                elif cell == +1:
+                    line += '| O |'
                 else:
-                    print('|', ' ', '|',end='')
-            print('\n-----------------')
+                    line += '|   |'
+            line +=('\n-----------------\n')
+            r+=1
+        return line
         
-
     def clean(self):
         """
         Clears the console
@@ -128,10 +136,6 @@ class AI:
 
 
     def aiturn(self):
-        self.clean()
-        print('Computer turn [{}]'.format(computer_choice))
-        self.render(self.board)
-
         if len(self.empty_cells(self.board)) == 9:
             x = choice([0, 1, 2])
             y = choice([0, 1, 2])
@@ -141,10 +145,19 @@ class AI:
 
         self.set_move(x, y, self.COMPUTER)
 
-    def main(self):
-        self.clean()
-        global computer_choice, human_choice
+    def xo_bot(self, position):
 
+        TicTac3X3.computer_choice, TicTac3X3.human_choice
+        position = position.upper()
+        x = ord(position[0]) - ord('A')
+        y = int(position[1])
+        move = 0
+        if x == 0:
+            move = x + y
+        elif x == 1:
+            move = x*3 + y
+        else:
+            move = x*3 + y
         #valid moves
         moves = {
             1: [0, 0], 2: [0, 1], 3: [0, 2],
@@ -152,57 +165,48 @@ class AI:
             7: [2, 0], 8: [2, 1], 9: [2, 2],
         }
 
-        # moves = {
-        #     A1: [0, 0], A2: [0, 1], A3: [0, 2],
-        #     B1: [1, 0], B2: [1, 1], B3: [1, 2],
-        #     C1: [2, 0], C2: [2, 1], C3: [2, 2],
-        # }
-
-
-        # Setting computer's choice
         human_choice = 'X'
         computer_choice = 'O'
 
-
-        while not self.game_over_all(self.board) and len(self.empty_cells(self.board)) > 0:
-            self.clean()
-            print('Human turn [{}]'.format(human_choice))
-            self.render(self.board)
-            move = 0
-            while move < 1 or move > 9:
-                try:
-                    move = int(input('Use numpad (A1..C3): '))
-                    coord = moves[move]
-                    try_move = self.set_move(coord[0], coord[1], self.HUMAN)
-
-                    if try_move == False:
-                        print('Bad move')
-                        move = 0
-                except KeyboardInterrupt:
-                    print('Bye')
-                    exit()
-                except:
-                    print('Bad choice')
-
-            self.aiturn()
-
-        if self.game_over(self.board, self.HUMAN):
-            self.clean()
-            print('Human turn [{}]'.format(human_choice))
-            print('YOU WIN!')
-        elif self.game_over(self.board, self.COMPUTER):
-            self.clean()
-            print('Computer turn [{}]'.format(computer_choice))
-            self.render(self.board)
-            print('YOU LOSE!')
+        if not self.game_over_all(self.board) and len(self.empty_cells(self.board)) > 0:
+            if move > 0 or move < 10:
+                coord = moves[move]
+                try_move = self.set_move(coord[0], coord[1], self.HUMAN)
+                if try_move == False:
+                    print('Bad move')
+                    move = 0
+            if try_move == True:
+                self.aiturn()
+                return True
+            else:
+                return False
+                
+    def getWin(self):
+        if self.game_over_all(self.board) or len(self.empty_cells(self.board)) == 0:
+            if self.game_over(self.board, self.HUMAN):
+                return 'Human wins'
+            elif self.game_over(self.board, self.COMPUTER):
+                self.render(self.board)
+                return 'Bot wins'
+            else:
+                self.render(self.board)
+                return 'Draw'
         else:
-            self.clean()
-            self.render(self.board)
-            print('DRAW!')
-
-        exit()
-
-
-if __name__ == '__main__':
-    ai = AI()
-    ai.main()
+            return None
+        
+    def getGameState(self):
+        strr = ' '
+        strr += '| 1 || 2 || 3 |' + '\n' + '-----------------' + '\n'
+        r = 0
+        for row in self.board:
+            strr +=(chr(r + ord('A')))
+            for cell in row:
+                if cell == -1:
+                    strr += '| X |'
+                elif cell == +1:
+                    strr += '| O |'
+                else:
+                    strr += '|   |'
+            strr +=('\n-----------------\n')
+            r+=1
+        return strr

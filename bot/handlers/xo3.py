@@ -3,7 +3,7 @@ from telegram.ext import CommandHandler
 from telegram import ReplyKeyboardRemove
 
 from bot.user import StateId
-from bot.modes.xo5 import TicTac5X5
+from bot.modes.xo3 import TicTac3X3
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +22,7 @@ def xo_3(bot, update):
     )
 
     if (user_state.xo3_game is None):
-        user_state.xo3_game = TicTac5X5(3, 3)
+        user_state.xo3_game = TicTac3X3()
 
         bot.send_message (
             chat_id=update.message.chat_id,
