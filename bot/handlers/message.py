@@ -117,7 +117,47 @@ def xo3_game_handler(bot, update):
     )
 
 def matches_game_handler(bot, update):
-    pass
+    reply_markup = ReplyKeyboardRemove ()
+
+    user_state = bot.state[update.message.chat_id]
+
+    if (user_state.matches_game is None):
+        bot.send_message (
+            chat_id=update.message.chat_id,
+            text="No game found, use /matches to start new game",
+            reply_markup=reply_markup
+        )
+
+        return
+
+    ok = user_state.matches_game.sendUserMove(update.message.text)
+
+    if (not ok):
+        bot.send_message (
+            chat_id=update.message.chat_id,
+            text="Invalid Move",
+            reply_markup=reply_markup
+        )
+
+        return
+
+    bot.send_message (
+        chat_id=update.message.chat_id,
+        text=user_state.matches_game.getGameState(),
+        reply_markup=reply_markup
+    )
+
+    winner = user_state.matches_game.getWin()
+
+    if (winner is not None):
+        user_state.matches_game = None
+        user_state.state_id = StateId.Start
+
+        bot.send_message (
+            chat_id=update.message.chat_id,
+            text="Game Over, Winner: " + winner,
+            reply_markup=reply_markup
+    )
 
 def talk_handler(bot, update):
     reply_markup = ReplyKeyboardRemove ()

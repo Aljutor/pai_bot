@@ -3,6 +3,8 @@ from telegram.ext import CommandHandler
 from telegram import ReplyKeyboardRemove
 
 from bot.user import StateId
+from bot.modes.matches import Matches
+
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +23,7 @@ def matches(bot, update):
     )
 
     if (user_state.matches_game is None):
-        user_state.matches_game = "MATCHES GAME STATE MOCK"
+        user_state.matches_game = Matches(21, 3)
 
         bot.send_message (
             chat_id=update.message.chat_id,
@@ -30,12 +32,12 @@ def matches(bot, update):
 
     bot.send_message (
         chat_id=update.message.chat_id,
-        text=user_state.matches_game,
+        text=user_state.matches_game.getGameState(),
     )
 
     bot.send_message (
         chat_id=update.message.chat_id,
-        text="Awaiting your move",
+        text="Awaiting your move (1 - 3)",
     )
 
 

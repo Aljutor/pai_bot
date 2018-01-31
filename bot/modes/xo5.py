@@ -13,9 +13,12 @@ class TicTac5X5():
 
     def sendUserMove(self, position):
         position = position.upper()
-        x = ord(position[0]) - ord('A')
-        y = int(position[1:]) - 1
-        if self.field[x][y] == '.':
+        try:
+            x = ord(position[0]) - ord('A')
+            y = int(position[1:]) - 1
+        except:
+            return False
+        if x < self.size and y < self.size and self.field[x][y] == '.':
             self.field[x][y] = self.he
             self.makeMove()
             return True
