@@ -14,7 +14,7 @@ help_text = "Telegram bot for PAI 486 course \n" \
             "/talk    - talk mode (can solve simple math) \n" \
             "/matches - 21 matches game \n" \
             "/xo3     - classic 3x3 TicTacToe game \n" \
-            "/xo5     - TicTackToe on 10x10 filed, 5 in row \n" \
+            "/xo5     - TicTacToe on 10x10 filed, 5 in row \n" \
             "\n" \
             "Game state saved (until bot restart) \n" \
             "After game over use command again to start new game \n" \
