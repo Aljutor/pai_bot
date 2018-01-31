@@ -12,12 +12,13 @@ def start(bot, update):
 
     bot.state[update.message.chat_id].state_id = StateId.Start
 
-    custom_keyboard = [['/xo'],
+    start_keyboard = [['/xo3'],
+                       ['/xo5'],
                        ["/math"],
-                       ['/matches'],
-                       ['/xo_5row']]
+                       ['/matches']]
 
-    reply_markup = ReplyKeyboardMarkup (custom_keyboard)
+
+    reply_markup = ReplyKeyboardMarkup (start_keyboard)
 
     bot.send_message(
         chat_id=update.message.chat_id,

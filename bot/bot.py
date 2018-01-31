@@ -9,10 +9,10 @@ from telegram.error import (TelegramError, Unauthorized, BadRequest,
 from bot.user import UserState
 
 from bot.handlers.math import Math_handler
-from bot.handlers.xo_5row import XO5_handler
+from bot.handlers.xo5 import XO5_handler
 from bot.handlers.start import Start_handler
 from bot.handlers.matches import Matches_handler
-from bot.handlers.xo_classic import XO_classic_handler
+from bot.handlers.xo3 import XO3_handler
 
 from bot.handlers.message import Text_handler
 
@@ -35,7 +35,7 @@ class Bot:
         self.dispatcher.add_handler(Start_handler)
         self.dispatcher.add_handler(Math_handler)
         self.dispatcher.add_handler(Matches_handler)
-        self.dispatcher.add_handler(XO_classic_handler)
+        self.dispatcher.add_handler(XO3_handler)
         self.dispatcher.add_handler(XO5_handler)
 
         self.dispatcher.add_handler(Text_handler)

@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 from bot.user import StateId
 
-def xo_5row(bot, update):
+def xo_5(bot, update):
     logger.info("XO_5row command, id: " + str(update.message.chat_id))
 
     user_state = bot.state[update.message.chat_id]
@@ -42,4 +42,4 @@ def xo_5row(bot, update):
     )
 
 
-XO5_handler = CommandHandler('xo_5row', xo_5row)
+XO5_handler = CommandHandler('xo5', xo_5)
