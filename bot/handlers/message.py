@@ -4,6 +4,8 @@ from telegram import ReplyKeyboardRemove
 from telegram.ext import MessageHandler, Filters
 
 from bot.user import StateId
+from bot.modes.talk.command import query
+
 
 logger = logging.getLogger(__name__)
 
@@ -11,6 +13,9 @@ def text(bot, update):
     logger.info("Text command, id: " + str(update.message.chat_id) + " text: " + update.message.text)
 
     user_state = bot.state[update.message.chat_id]
+
+    if (user_state.state_id == StateId.Talk) :
+        talk_handler(bot, update)
 
     if (user_state.state_id == StateId.XO_5) :
         xo5_game_handler(bot, update)
@@ -113,3 +118,30 @@ def xo3_game_handler(bot, update):
 
 def matches_game_handler(bot, update):
     pass
+
+def talk_handler(bot, update):
+    reply_markup = ReplyKeyboardRemove ()
+
+    bot.send_message (
+        chat_id=update.message.chat_id,
+        text="Thinking...",
+        reply_markup=reply_markup
+    )
+
+    result = query(update.message.text)
+    print(result)
+
+    if (result is None or result == ""):
+        bot.send_message (
+            chat_id=update.message.chat_id,
+            text="Woops, sorry I am not smart enough",
+            reply_markup=reply_markup
+        )
+
+        return
+
+    bot.send_message (
+        chat_id=update.message.chat_id,
+        text=result,
+        reply_markup=reply_markup
+    )

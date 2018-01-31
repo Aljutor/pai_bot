@@ -1,5 +1,4 @@
 import numpy as np
-
 class TicTac5X5():
 
     def __init__(self,sizeOfField,inArowToWin):
@@ -35,7 +34,7 @@ class TicTac5X5():
         for x in range(self.size):
             for y in range(self.size):
                 if self.field[x][y] != '.':
-                    if self.potential([x,y],self.field[x][y]) >= (self.inARow + 1)*100:
+                    if self.potential([x,y],self.field[x][y]) >= ((self.inARow+1)**(self.inARow+1))*10:
                         self.winner = self.field[x][y]
                     d = 2
                     u = 2
@@ -52,29 +51,21 @@ class TicTac5X5():
                     for i in range(x-l,x+r+1):
                         for j in range(y-u,y+d+1):
                             if self.field[i][j] == '.':
-#                                 print(i, j)
                                 validSteps[(i,j)] = self.potential([i,j],self.me)
-        print(validSteps)
-    #     print(validSteps[max(validSteps, key = validSteps.get)[0]])
         el = max(validSteps, key = validSteps.get)
-        # print(el)
         self.field[el[0]][el[1]] = self.me
-        if self.potential([el[0],el[1]],self.field[el[0]][el[1]]) >= (self.inARow + 1)*100:
+        if self.potential([el[0],el[1]],self.field[el[0]][el[1]]) >= ((self.inARow+1)**(self.inARow+1))*10:
             self.winner = self.field[el[0]][el[1]]
 
 
-    def potentialOfLine(self,line, me):
-        if len(line) <= self.inARow + 1:
+    def potentialOfLine(self,line, me, mid):
+        if len(line) < self.inARow + 1:
             return 0
-        mid = len(line)//2
         he = 'x' if me == 'o' else 'o'
-        # if line == ['.', '.', '.', '.', '.', 'x', 'x', 'x', 'x']:
-        #     print(str(mid) + ' ' + me)
         line[mid] = me
         possible = False
         count = 1
         potential = 0
-        #  print(line)
         for i in range(1,mid+1):
             if line[mid-i] != he:
                 count += 1
@@ -98,9 +89,7 @@ class TicTac5X5():
                     break
             if potential == 1:
                 potential = 0
-        if potential >= self.inARow + 1:
-            return potential*10
-        return potential
+        return potential**(self.inARow+1)
 
 
     def potential (self, position, me):
@@ -134,16 +123,14 @@ class TicTac5X5():
             diag1.append(self.field[x+j][y-j])
         for j in range(-minLeftDown,minRightUp+1):
             diag2.append(self.field[x+j][y+j])
-        if position == [2,2]:
-            print(row,line,diag1,diag2)
-        winPotential = self.potentialOfLine(row,me) + self.potentialOfLine(line,me) + self.potentialOfLine(diag1,me) + self.potentialOfLine(diag2,me)
-        losePotential = self.potentialOfLine(row,he) + self.potentialOfLine(line,he) + self.potentialOfLine(diag1,he) + self.potentialOfLine(diag2,he)
-        if self.field[x][y] == me and winPotential >= (self.inARow+1)*10:
+        winPotential = self.potentialOfLine(row,me,d) + self.potentialOfLine(line,me,l) + self.potentialOfLine(diag1,me,minLeftUp) + self.potentialOfLine(diag2,me,minLeftDown)
+        losePotential = self.potentialOfLine(row,he,d) + self.potentialOfLine(line,he,l) + self.potentialOfLine(diag1,he,minLeftUp) + self.potentialOfLine(diag2,he,minLeftDown)
+        if winPotential >= (self.inARow+1)**(self.inARow+1):
             return winPotential*10
         if losePotential > winPotential:
             return losePotential
         else:
-            return winPotential
+            return winPotential+1
 
     def getGameState(self):
         output = np.rot90(self.field,axes=(0,1))

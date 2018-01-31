@@ -8,7 +8,7 @@ from telegram.error import (TelegramError, Unauthorized, BadRequest,
 
 from bot.user import UserState
 
-from bot.handlers.math import Math_handler
+from bot.handlers.talk import Talk_handler
 from bot.handlers.xo5 import XO5_handler
 from bot.handlers.start import Start_handler
 from bot.handlers.matches import Matches_handler
@@ -33,7 +33,7 @@ class Bot:
     def _set_handlers(self):
         logger.info("Setup handlers")
         self.dispatcher.add_handler(Start_handler)
-        self.dispatcher.add_handler(Math_handler)
+        self.dispatcher.add_handler(Talk_handler)
         self.dispatcher.add_handler(Matches_handler)
         self.dispatcher.add_handler(XO3_handler)
         self.dispatcher.add_handler(XO5_handler)

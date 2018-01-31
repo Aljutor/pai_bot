@@ -7,17 +7,23 @@ from bot.user import StateId
 
 logger = logging.getLogger(__name__)
 
-def math(bot, update):
+def talk(bot, update):
     logger.info("Math command, id: " + str(update.message.chat_id))
 
-    bot.state[update.message.chat_id].state_id = StateId.Math
+    bot.state[update.message.chat_id].state_id = StateId.Talk
 
     reply_markup = ReplyKeyboardRemove()
 
     bot.send_message(
         chat_id=update.message.chat_id,
-        text="Starting Math mode",
+        text="Starting talk mode",
         reply_markup=reply_markup
     )
 
-Math_handler = CommandHandler('math', math)
+    bot.send_message(
+        chat_id=update.message.chat_id,
+        text="Send your question",
+        reply_markup=reply_markup
+    )
+
+Talk_handler = CommandHandler('talk', talk)

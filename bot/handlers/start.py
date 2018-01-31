@@ -14,7 +14,7 @@ def start(bot, update):
 
     start_keyboard = [['/xo3'],
                        ['/xo5'],
-                       ["/math"],
+                       ["/talk"],
                        ['/matches']]
 
 

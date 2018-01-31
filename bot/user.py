@@ -2,7 +2,7 @@ from enum import Enum
 
 class StateId(Enum):
     Start   = 0
-    Math    = 1
+    Talk    = 1
     XO_3    = 2
     XO_5    = 3
     Matches = 4
