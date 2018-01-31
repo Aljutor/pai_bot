@@ -7,7 +7,9 @@ class Matches():
     
     def sendUserMove(self,matches):
         try:
-            if int(matches)>0 and int(matches)<=self.max:
+            matches = int(matches)
+
+            if matches > 0 and matches <= self.max:
                 self.amount -= matches
                 self.makeMove()
                 return True
@@ -23,7 +25,6 @@ class Matches():
         return self.amount
     
     def makeMove(self):
-        print('yeah')
         if self.amount == 1:
             self.winner = 'You'
         else:
