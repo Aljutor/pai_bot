@@ -1,4 +1,6 @@
+import os
 import logging
+
 from bot.bot import Bot
 
 logging.basicConfig(
@@ -6,9 +8,8 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-token = "468336611:AAERPcwsq4iWifxpdqCJdU2v66fG7ftzDjA"
-
 def main():
+    token = os.environ['BOT_TOKEN']
     bot = Bot(token)
     bot.start()
 
