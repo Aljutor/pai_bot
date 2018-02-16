@@ -18,7 +18,7 @@ class YandexTranslator:
     def select_lang(self, some_text):
         d = {}
 
-        with open("l.txt" , "r+") as file:
+        with open("lang.txt" , "r+") as file:
 
             for line in file:
 
