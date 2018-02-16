@@ -6,6 +6,7 @@ class StateId(Enum):
     XO_3    = 2
     XO_5    = 3
     Matches = 4
+    Translate = 5
 
 
 class UserState:

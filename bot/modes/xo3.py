@@ -146,11 +146,21 @@ class TicTac3X3:
         self.set_move(x, y, self.COMPUTER)
 
     def xo_bot(self, position):
+        position = position.upper().split()
 
-        TicTac3X3.computer_choice, TicTac3X3.human_choice
-        position = position.upper()
-        x = ord(position[0]) - ord('A')
-        y = int(position[1])
+        try:
+            if len(position) == 2:
+                x = ord(position[0]) - ord('A')
+                y = int(position[1])
+
+            elif len(position) == 1:
+                x = ord(position[0][0]) - ord('A')
+                y = int(position[0][1:])
+            else:
+                return False
+        except:
+            return False
+
         move = 0
         if x == 0:
             move = x + y
