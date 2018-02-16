@@ -34,6 +34,7 @@ def xo_5(bot, update):
     bot.send_message (
         chat_id=update.message.chat_id,
         text=user_state.xo5_game.getGameState(),
+        parse_mode="MARKDOWN"
     )
 
     bot.send_message (

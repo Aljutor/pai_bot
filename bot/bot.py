@@ -13,10 +13,12 @@ from bot.handlers.start import Help_handler
 from bot.handlers.talk import Talk_handler
 from bot.handlers.xo5 import XO5_handler
 from bot.handlers.xo3 import XO3_handler
+from bot.handlers.translate import Translate_handler
 
 from bot.handlers.matches import Matches_handler
 
 from bot.handlers.message import Text_handler
+from bot.handlers.voice import Voice_handler
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +43,9 @@ class Bot:
         self.dispatcher.add_handler(XO5_handler)
         self.dispatcher.add_handler(Help_handler)
 
+        self.dispatcher.add_handler(Voice_handler)
         self.dispatcher.add_handler(Text_handler)
+        self.dispatcher.add_handler(Translate_handler)
 
         def error_callback(bot, update, error):
             try:
