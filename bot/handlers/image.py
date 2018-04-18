@@ -7,7 +7,7 @@ import requests
 import numpy as np
 from telegram.ext import MessageHandler, Filters
 
-from modes.image import gen_model, predict
+from bot.modes.image import gen_model, predict
 
 logger = logging.getLogger(__name__)
 
