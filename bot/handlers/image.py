@@ -21,9 +21,9 @@ def find_simular(file):
 
     result = predict(rgbImg, clf)
 
-    # text = ""
-    # for name, prob in result:
-    #     text += "* {}: Prob {}".format(name, prob)
+    text = ""
+    for name, prob in result:
+        text += "* {}: Prob {}\n".format(name, prob)
 
     return str(result)
 
@@ -40,7 +40,8 @@ def photo(bot, update):
 
             bot.send_message(
                 chat_id=update.message.chat_id,
-                text='Image recognition: ' + text,
+                text='Image recognition:\n' + text,
+                parse_mode="MARKDOWN"
             )
 
         except Exception as e:
