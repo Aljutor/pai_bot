@@ -23,9 +23,9 @@ def find_simular(file):
 
     text = ""
     for name, prob in result:
-        text += "* {}: Prob {}\n".format(name, prob)
+        text += "* {}: Prob {}\n".format(name, round(prob, 3))
 
-    return str(result)
+    return text
 
 def photo(bot, update):
     photo = update.message.photo[0]
