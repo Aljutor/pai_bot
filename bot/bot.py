@@ -19,6 +19,7 @@ from bot.handlers.matches import Matches_handler
 
 from bot.handlers.message import Text_handler
 from bot.handlers.voice import Voice_handler
+from bot.handlers.image import Photo_handler
 
 logger = logging.getLogger(__name__)
 
@@ -27,11 +28,8 @@ class Bot:
     def __init__(self, token):
         logger.info("Creating bot")
         self.updater = Updater(token)
-
         self.updater.bot.state = defaultdict(UserState)
-
         self.dispatcher = self.updater.dispatcher
-
         self._set_handlers()
 
     def _set_handlers(self):
@@ -46,6 +44,7 @@ class Bot:
         self.dispatcher.add_handler(Voice_handler)
         self.dispatcher.add_handler(Text_handler)
         self.dispatcher.add_handler(Translate_handler)
+        self.dispatcher.add_handler(Photo_handler)
 
         def error_callback(bot, update, error):
             try:
