@@ -2,16 +2,26 @@ import os
 import io
 import uuid
 import logging
-
+import cv2
 import requests
-
+import numpy as np
 from telegram.ext import MessageHandler, Filters
 
+from modes.image import gen_model, predict
 
 logger = logging.getLogger(__name__)
 
-def find_simular(image):
-    return "Yeah"
+clf = gen_model()
+
+def find_simular(file):
+    data = np.frombuffer(file.getvalue(), dtype=np.uint8)
+    color_image_flag = 1
+    bgrImg = cv2.imdecode(data, color_image_flag)
+    rgbImg = cv2.cvtColor(bgrImg, cv2.COLOR_BGR2RGB)
+
+    result = predict(rgbImg, clf)
+
+    return str(result)
 
 def photo(bot, update):
     photo = update.message.photo[0]
