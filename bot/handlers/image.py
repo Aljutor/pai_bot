@@ -23,7 +23,7 @@ def find_simular(file):
 
     text = ""
     for name, prob in result:
-        text += "* {}: Prob {}\n".format(name, round(prob, 3))
+        text += "{}: Prob {}\n".format(name, round(prob, 3))
 
     return text
 
