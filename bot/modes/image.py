@@ -4,7 +4,7 @@ import openface
 
 from pathlib import Path
 from sklearn.neighbors import KNeighborsClassifier
-
+from sklearn import linear_model
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -50,7 +50,9 @@ def load_data():
 
 def gen_model():
     X, Y = load_data()
-    clf = KNeighborsClassifier(n_neighbors=3)
+
+    clf = linear_model.SGDClassifier(loss="modified_huber")
+    #clf = KNeighborsClassifier(n_neighbors=3)
     clf.fit(X, Y)
 
     return clf
