@@ -49,7 +49,7 @@ def load_data():
 
 def gen_model():
     X, Y = load_data()
-    clf = KNeighborsClassifier(n_neighbors=2)
+    clf = KNeighborsClassifier(n_neighbors=3)
     clf.fit(X, Y)
 
     return clf

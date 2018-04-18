@@ -26,6 +26,8 @@ help_text = "Telegram bot for PAI 486 course \n" \
             "'switch to translate' \n" \
             "'play 5 in row' \n" \
             "'switch to math' \n" \
+            "*NEW* You can send your photo and get list of celebrities\n" \
+            "who looks similar to you\n" \
 
 
 def start(bot, update):

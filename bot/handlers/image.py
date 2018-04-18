@@ -21,7 +21,11 @@ def find_simular(file):
 
     result = predict(rgbImg, clf)
 
-    return str(result)
+    text = ""
+    for name, prob in result:
+        text += "* {}: Prob {}".format(name, prob)
+
+    return text
 
 def photo(bot, update):
     photo = update.message.photo[0]
