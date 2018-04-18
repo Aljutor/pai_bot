@@ -60,5 +60,5 @@ def gen_model():
 
 def predict(rgb_img, clf):
     rep = [face_rep(rgb_img)]
-    return sorted(list(zip(clf.classes_, clf.predict_proba(rep)[0])), key=lambda tup: tup[1], reverse=True)[:2]
+    return sorted(list(zip(clf.classes_, clf.predict_proba(rep)[0])), key=lambda tup: tup[1], reverse=True)[:5]
 
