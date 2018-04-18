@@ -27,7 +27,7 @@ def face_rep(rgb_img):
 
 
 def read_path(img_path):
-    bgr_img = cv2.imread(img_path)
+    bgr_img = cv2.imread(str(img_path))
     rgb_img = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
     return rgb_img
 
