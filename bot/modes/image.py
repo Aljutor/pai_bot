@@ -38,13 +38,14 @@ def load_data():
 
     for path in Path(faces_dir).glob("*.jpg"):
         label = path.name.lower().split('-')[0]
-        images.append(path)
-        labels.append(label)
+        try:
+            images.append(face_rep(read_path(path)))
+            labels.append(label)
+        except:
+            print(path)
+            continue
 
-    X = [face_rep(read_path(img)) for img in images]
-    Y = labels
-
-    return X, Y
+    return images, labels
 
 
 def gen_model():
