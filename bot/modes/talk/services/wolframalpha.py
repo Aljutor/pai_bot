@@ -11,15 +11,26 @@ def ask(query):
 
     if resp.status_code != 200:
         answer = "http error"
-    else: 
+    else:
+
         dom = BeautifulSoup(resp.text, "lxml")
         result = dom.queryresult.findAll("pod", id="Solution")
+
         if not result:
             result = dom.queryresult.findAll("pod", id="Result")
+
         if not result:
             result = dom.queryresult.findAll("pod", id="Root")
+
         if not result:
-            result = dom.queryresult.findAll("pod", id="Derivative")
+            result = dom.queryresult.findAll("pod", title="Derivative")
+
+        if not result:
+            result = dom.queryresult.findAll ("pod", title="Definite integral")
+
+        if not result:
+            result = dom.queryresult.findAll ("pod", title="Indefinite integral")
+
         if result:
             subpods = result[0].findAll("subpod")
             answers = list(pod.plaintext.string for pod in subpods)
